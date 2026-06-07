@@ -29,8 +29,9 @@ const config = {
 await blast("🚨 Server anomaly detected on node-04.", config);
 ```
 ## 🛠️ Setup
-2.​Clone the repository into your architecture framework.
-​Initialize and verify operational dependencies:
+1.​Clone the repository into your architecture framework.
+
+2.​Initialize and verify operational dependencies:
 ```bash
 npm install
 ```
