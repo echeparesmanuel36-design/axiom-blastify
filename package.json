@@ -1,0 +1,11 @@
+{
+  "name": "axiom-blastify",
+  "version": "1.0.0",
+  "description": "Unified micro-notification utility",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^6.9.13"
+  }
+}
