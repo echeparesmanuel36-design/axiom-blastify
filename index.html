@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axiom Blastify — Unified Notification Architecture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* MODO CLARO (Boutique de Lujo / Minimalismo Absoluto) */
+            --bg-color: #FBFBFA;
+            --surface-color: #FFFFFF;
+            --text-main: #111111;
+            --text-muted: #666666;
+            --accent-color: #000000;
+            --border-color: #E5E5E0;
+            --code-bg: #F4F4F2;
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-theme="dark"] {
+            /* MODO OSCURO (Colección Nocturna Premium) */
+            --bg-color: #0A0A0A;
+            --surface-color: #121212;
+            --text-main: #F5F5F7;
+            --text-muted: #8E8E93;
+            --accent-color: #FFFFFF;
+            --border-color: #222222;
+            --code-bg: #1A1A1A;
+            --shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+        }
+
+        header {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 20px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            border-radius: 24px;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--text-main);
+            color: var(--bg-color);
+            border-color: var(--text-main);
+        }
+
+        main {
+            max-width: 800px;
+            width: 100%;
+            margin: auto;
+            padding: 40px 24px 80px 24px;
+            text-align: center;
+        }
+
+        .category-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-size: 52px;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 28px;
+        }
+
+        .subtitle {
+            font-size: 17px;
+            color: var(--text-muted);
+            line-height: 1.65;
+            max-width: 600px;
+            margin: 0 auto 52px auto;
+            font-weight: 300;
+        }
+
+        .code-container {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            text-align: left;
+            margin-bottom: 48px;
+            transition: var(--transition);
+        }
+
+        .code-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-title {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-family: monospace;
+            letter-spacing: 0.05em;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .copy-btn:hover {
+            color: var(--text-main);
+        }
+
+        pre {
+            padding: 28px;
+            overflow-x: auto;
+            background-color: var(--code-bg);
+            border-bottom-left-radius: 7px;
+            border-bottom-right-radius: 7px;
+            margin: 0;
+            transition: var(--transition);
+        }
+
+        code {
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.65;
+            color: var(--text-main);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border: 1px solid var(--accent-color);
+            padding: 20px 44px;
+            font-size: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--text-main);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            padding: 40px 24px;
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-top: 1px solid var(--border-color);
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Axiom Systems</div>
+        <button class="theme-toggle" id="themeToggle">Dark Mode</button>
+    </header>
+
+    <main>
+        <span class="category-tag">Micro-Infrastructure Series</span>
+        <h1>The Luxury of Simplicity</h1>
+        <p class="subtitle">Broadcast instant alerts to Discord, Telegram, or Email dynamically. One unified payload. A single line of code inside your active architecture.</p>
+
+        <div class="code-container">
+            <div class="code-header">
+                <span class="code-title">axiom-blastify.js</span>
+                <button class="copy-btn" id="copyBtn">Copy Snippet</button>
+            </div>
+            <pre><code id="codeBlock">import { blast } from 'axiom-blastify';
+
+const payload = {
+    discordUrl: "https://discord.com/api/webhooks/...",
+    telegramToken: "YOUR_BOT_TOKEN",
+    telegramChatId: "YOUR_CHAT_ID",
+    email: "alerts@domain.com"
+};
+
+// Dispatch core notification to all channels simultaneously
+await blast("🚨 Architecture status: Online.", payload);</code></pre>
+        </div>
+
+        <a href="https://github.com/tu-usuario/axiom-blastify" class="cta-button" id="githubLink">Access Repository</a>
+    </main>
+
+    <footer>
+        © 2026 Axiom Systems. Built for absolute precision.
+    </footer>
+    <script>
+        // Lógica sutil para el cambio de Modo Claro / Oscuro (Louis Vuitton Style)
+        const toggleBtn = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        toggleBtn.addEventListener('click', () => {
+            if (html.getAttribute('data-theme') === 'light') {
+                html.setAttribute('data-theme', 'dark');
+                toggleBtn.innerText = 'Light Mode';
+            } else {
+                html.setAttribute('data-theme', 'light');
+                toggleBtn.innerText = 'Dark Mode';
+            }
+        });
+
+        // Lógica del botón de copiado rápido del código al portapapeles
+        document.getElementById('copyBtn').addEventListener('click', () => {
+            const codeText = document.getElementById('codeBlock').innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.innerText = 'Copied!';
+                setTimeout(() => { 
+                    btn.innerText = 'Copy Snippet'; 
+                }, 2000);
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+        });
+    </script>
+</body>
+</html>
